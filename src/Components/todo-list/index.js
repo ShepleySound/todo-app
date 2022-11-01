@@ -26,12 +26,12 @@ export default function TodoList({ list, toggleComplete, deleteItem }) {
             deleteItem={deleteItem}
           />
         ))}
+        <Pagination
+          page={activePage}
+          onChange={setPage}
+          total={Math.ceil(list.length / perPage)}
+        />
       </Stack>
-      <Pagination
-        page={activePage}
-        onChange={setPage}
-        total={Math.ceil(list.length / perPage)}
-      />
     </>
   );
 }

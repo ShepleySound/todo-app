@@ -17,7 +17,7 @@ import {
   CloseButton,
 } from '@mantine/core';
 
-const Todo = ({ item, toggleComplete }) => {
+const Todo = ({ item, toggleComplete, deleteItem }) => {
   return (
     <Card
       shadow='sm'
@@ -32,15 +32,21 @@ const Todo = ({ item, toggleComplete }) => {
             <Text span>{item.assignee}</Text>
           </Group>
           <Group>
-            <CloseButton></CloseButton>
+            <CloseButton
+              title='Delete Task'
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteItem(item.id);
+              }}
+            ></CloseButton>
           </Group>
         </Group>
       </Card.Section>
       {/* <Divider my='sm' /> */}
-      <Card.Section inheritPadding py='sm'>
+      <Card.Section inheritPadding py='xs'>
         <Text lineClamp={10}>{item.text}</Text>
       </Card.Section>
-      <Card.Section withBorder inheritPadding>
+      <Card.Section p='xs'>
         <Group position='right'>
           <Text size='xs'>Difficulty: {item.difficulty}</Text>
         </Group>
