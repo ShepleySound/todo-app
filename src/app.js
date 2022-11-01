@@ -1,11 +1,9 @@
 import React from 'react';
 
-import ToDo from './Components/ToDo';
+import Todo from './Components/Todo';
 
 export default class App extends React.Component {
   render() {
-    return (
-      <ToDo />
-    );
+    return <Todo />;
   }
 }
