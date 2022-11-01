@@ -5,10 +5,10 @@ import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
   const [defaultValues] = useState({
-    difficulty: 4,
+    difficulty: 3,
   });
   const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState([]);
+  const [incomplete, setIncomplete] = useState(0);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
