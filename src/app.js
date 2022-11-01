@@ -50,7 +50,7 @@ export default function App() {
       <Container size='md'>
         <Grid>
           <Grid.Col span={12}>
-            <Header />
+            <Header incomplete={incomplete} />
           </Grid.Col>
           <Grid.Col span={4}>
             <TodoForm addItem={addItem} />

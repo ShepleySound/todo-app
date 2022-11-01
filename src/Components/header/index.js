@@ -1,16 +1,17 @@
-import { Box, Text } from '@mantine/core';
+import { Container, Title } from '@mantine/core';
 
 export default function Header(props) {
   return (
-    <Box
+    <Container
       data-testid='todo-header'
+      p={16}
       sx={(theme) => ({
-        backgroundColor: theme.colors.gray[7],
+        backgroundColor: theme.colors.gray[8],
       })}
     >
-      <Text data-testid='todo-h1' color='white'>
+      <Title order={3} width={100} data-testid='todo-h1' color='white'>
         Todo List: {props.incomplete} items pending
-      </Text>
-    </Box>
+      </Title>
+    </Container>
   );
 }

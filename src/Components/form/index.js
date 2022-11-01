@@ -61,23 +61,6 @@ export default function TodoForm({ addItem }) {
           ]}
         />
 
-        <NumberInput
-          name='difficulty'
-          // Custom onChange callback because Mantine components only return a value rather than a full event.
-          // This is just a stop-gap for a better solution, hopefully.
-          onChange={(val) => {
-            const e = {
-              target: {
-                value: val,
-                name: 'difficulty',
-              },
-            };
-            handleChange(e);
-          }}
-          defaultValue={defaultValues.difficulty}
-          label='difficulty'
-        />
-
         <Button type='submit'>Add Item</Button>
       </form>
     </Paper>

@@ -13,6 +13,7 @@ root.render(
         sx={(theme) => ({
           backgroundColor: theme.colors.blue[6],
         })}
+        mb={16}
       >
         <Group>
           <Text color='white'>Home</Text>
