@@ -45,18 +45,6 @@ const Todo = ({ item, toggleComplete }) => {
           <Text size='xs'>Difficulty: {item.difficulty}</Text>
         </Group>
       </Card.Section>
-      {/* <Grid gutter='sm'>
-        <Grid.Col span={12} style={{ minHeight: 80 }}>
-          <Box>
-            <Text lineClamp={3}>{item.text}</Text>
-          </Box>
-        </Grid.Col>
-        <Grid.Col span={12}>
-          <Group position='right'>
-            <Text size='xs'>Difficulty: {item.difficulty}</Text>
-          </Group>
-        </Grid.Col>
-      </Grid> */}
     </Card>
   );
 };
