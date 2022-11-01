@@ -5,14 +5,14 @@ import TodoForm from './Components/form';
 
 import { v4 as uuid } from 'uuid';
 
-import SettingsProvider from './Context/settings';
+import { SettingsProvider } from './Context/settings';
 import { Container, Grid } from '@mantine/core';
 
 export default function App() {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState(0);
 
-  function addItem(item) {
+  function addItem({ ...item }) {
     const newId = uuid();
     item.id = newId;
     item.complete = false;
@@ -58,6 +58,7 @@ export default function App() {
           <Grid.Col span={8}>
             <TodoList
               list={list}
+              incomplete={incomplete}
               toggleComplete={toggleComplete}
               deleteItem={deleteItem}
             />

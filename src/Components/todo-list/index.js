@@ -1,19 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Stack, Pagination } from '@mantine/core';
-
+import { SettingsContext } from '../../Context/settings';
 import Todo from '../todo';
 
-const perPage = 5;
-
-export default function TodoList({ list, toggleComplete, deleteItem }) {
+export default function TodoList({
+  list,
+  toggleComplete,
+  deleteItem,
+  incomplete,
+}) {
+  const settings = useContext(SettingsContext);
   const [listStart, setListStart] = useState(0);
   const [displayList, setDisplayList] = useState(list);
   const [activePage, setPage] = useState(1);
 
   useEffect(() => {
-    setDisplayList(list.slice(listStart, listStart + perPage));
-    setListStart(perPage * (activePage - 1));
-  }, [list, listStart, activePage]);
+    setDisplayList(
+      list
+        .filter((item) => !item.complete)
+        .slice(listStart, listStart + settings.displayCount)
+    );
+    setListStart(settings.displayCount * (activePage - 1));
+  }, [list, listStart, activePage, settings.displayCount]);
 
   return (
     <>
@@ -29,7 +37,7 @@ export default function TodoList({ list, toggleComplete, deleteItem }) {
         <Pagination
           page={activePage}
           onChange={setPage}
-          total={Math.ceil(list.length / perPage)}
+          total={Math.ceil(incomplete / settings.displayCount)}
         />
       </Stack>
     </>

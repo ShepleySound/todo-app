@@ -2,8 +2,8 @@ import { createContext, useState } from 'react';
 
 const SettingsContext = createContext(null);
 
-export default function SettingsProvider({ children }) {
-  const [displayCompleted, setDisplayCompleted] = useState(true);
+function SettingsProvider({ children }) {
+  const [displayCompleted, setDisplayCompleted] = useState(false);
   const [displayCount, setDisplayCount] = useState(5);
   const [defaultSortField, setDefaultSortField] = useState('Difficulty');
 
@@ -19,3 +19,5 @@ export default function SettingsProvider({ children }) {
     </SettingsContext.Provider>
   );
 }
+
+export { SettingsContext, SettingsProvider };

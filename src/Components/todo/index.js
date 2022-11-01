@@ -28,7 +28,15 @@ const Todo = ({ item, toggleComplete, deleteItem }) => {
       <Card.Section withBorder inheritPadding py='xs'>
         <Group position='apart'>
           <Group>
-            <Badge>{item.complete.toString()}</Badge>
+            {item.complete ? (
+              <Badge size='md' variant='filled' color='green'>
+                complete
+              </Badge>
+            ) : (
+              <Badge size='md' variant='light' color='orange'>
+                pending
+              </Badge>
+            )}
             <Text span>{item.assignee}</Text>
           </Group>
           <Group>
