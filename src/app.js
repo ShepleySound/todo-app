@@ -1,9 +1,11 @@
-import React from 'react';
+import Header from './Components/header';
+import Todo from './Components/todo';
 
-import Todo from './Components/Todo';
-
-export default class App extends React.Component {
-  render() {
-    return <Todo />;
-  }
+export default function App() {
+  return (
+    <>
+      <Header />;
+      <Todo />
+    </>
+  );
 }
