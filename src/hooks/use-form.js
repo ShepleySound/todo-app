@@ -18,8 +18,6 @@ const useForm = (callback, defaultValues = {}) => {
   };
 
   const handleToggle = (event) => {
-    console.log(event.target.name);
-    console.log(event.target.checked);
     const { name, checked } = event.target;
     setValues((values) => ({ ...values, [name]: checked }));
   };
