@@ -1,12 +1,11 @@
-import { useState, useContext, useEffect } from 'react';
-import StatusHeader from './Components/status-header';
-import TodoList from './Components/todo-list';
-import TodoForm from './Components/form';
-
+import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { SettingsProvider } from './Context/settings';
-import { Container, Grid } from '@mantine/core';
+import { Container, Grid, Title } from '@mantine/core';
+
+import StatusHeader from '../Components/status-header';
+import TodoList from '../Components/todo-list';
+import TodoForm from '../Components/form';
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -46,25 +45,32 @@ export default function App() {
   }, [list]);
 
   return (
-    <SettingsProvider>
-      <Container size='md'>
-        <Grid>
-          <Grid.Col span={12}>
-            <StatusHeader incomplete={incomplete} />
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <TodoForm addItem={addItem} />
-          </Grid.Col>
-          <Grid.Col span={8}>
-            <TodoList
-              list={list}
-              incomplete={incomplete}
-              toggleComplete={toggleComplete}
-              deleteItem={deleteItem}
-            />
-          </Grid.Col>
-        </Grid>
-      </Container>
-    </SettingsProvider>
+    <Container size='md'>
+      <Grid>
+        <Grid.Col span={12}>
+          <StatusHeader>
+            <Title
+              order={3}
+              width={100}
+              data-testid='status-header-title'
+              color='white'
+            >
+              Todo List: {incomplete} items pending
+            </Title>
+          </StatusHeader>
+        </Grid.Col>
+        <Grid.Col span={4}>
+          <TodoForm addItem={addItem} />
+        </Grid.Col>
+        <Grid.Col span={8}>
+          <TodoList
+            list={list}
+            incomplete={incomplete}
+            toggleComplete={toggleComplete}
+            deleteItem={deleteItem}
+          />
+        </Grid.Col>
+      </Grid>
+    </Container>
   );
 }

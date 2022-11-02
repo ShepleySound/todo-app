@@ -1,25 +1,37 @@
-import { MantineProvider, Header, Group, Text } from '@mantine/core';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
+import { SettingsProvider } from './Context/settings';
 
-import App from './app.js';
+import Root from './root.js';
+import App from './Pages/app.js';
+import Settings from './Pages/settings';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        path: '/',
+        element: <App />,
+      },
+      {
+        path: '/settings',
+        element: <Settings />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Header
-        p={8}
-        sx={(theme) => ({
-          backgroundColor: theme.colors.blue[6],
-        })}
-        mb={16}
-      >
-        <Group>
-          <Text color='white'>Home</Text>
-        </Group>
-      </Header>
-      <App />
+      <SettingsProvider>
+        <RouterProvider router={router} />
+      </SettingsProvider>
     </MantineProvider>
   </React.StrictMode>
 );

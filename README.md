@@ -12,7 +12,7 @@ This todo application uses [Mantine](https://mantine.dev/) as the primary compon
 
 - Create tasks using a central form
 - Update individual task status
-- Delete individual tasks
+- Delete individual tasksx
 - Global application settings passed through the React Context API
 - Task list pagination
 
