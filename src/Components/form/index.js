@@ -25,6 +25,7 @@ export default function TodoForm({ addItem }) {
         <Stack spacing='md'>
           <Title order={2}>Add To Do Item</Title>
           <TextInput
+            data-testid='task-input'
             onChange={handleChange}
             placeholder='Item details...'
             label='Task'
@@ -33,6 +34,7 @@ export default function TodoForm({ addItem }) {
           />
 
           <TextInput
+            data-testid='assignee-input'
             name='assignee'
             onChange={handleChange}
             placeholder='Assignee name...'
@@ -41,6 +43,7 @@ export default function TodoForm({ addItem }) {
           />
 
           <Slider
+            data-testid='slider-input'
             name='difficulty'
             onChangeEnd={(val) => {
               const e = {
@@ -63,7 +66,9 @@ export default function TodoForm({ addItem }) {
             ]}
           />
 
-          <Button type='submit'>Add Item</Button>
+          <Button data-testid='form-submit-button' type='submit'>
+            Add Item
+          </Button>
         </Stack>
       </form>
     </Paper>

@@ -5,7 +5,7 @@ const SettingsContext = createContext(null);
 function SettingsProvider({ children }) {
   const [displayCompleted, setDisplayCompleted] = useState(false);
   const [displayCount, setDisplayCount] = useState(5);
-  const [defaultSortField, setDefaultSortField] = useState('Difficulty');
+  const [defaultSortField, setDefaultSortField] = useState('difficulty');
 
   return (
     <SettingsContext.Provider

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import Header from './Components/header';
+import StatusHeader from './Components/status-header';
 import TodoList from './Components/todo-list';
 import TodoForm from './Components/form';
 
@@ -50,7 +50,7 @@ export default function App() {
       <Container size='md'>
         <Grid>
           <Grid.Col span={12}>
-            <Header incomplete={incomplete} />
+            <StatusHeader incomplete={incomplete} />
           </Grid.Col>
           <Grid.Col span={4}>
             <TodoForm addItem={addItem} />
