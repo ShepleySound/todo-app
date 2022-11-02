@@ -12,7 +12,7 @@ import {
 
 import { SettingsContext } from '../../Context/settings';
 
-export default function SettingsForm({ addItem }) {
+export default function SettingsForm() {
   const { userSettings, setUserSettings } = useContext(SettingsContext);
 
   // const [values] = useState({
@@ -21,11 +21,16 @@ export default function SettingsForm({ addItem }) {
   //   sortKeyword: userSettings.sortKeyword,
   // });
 
-  const { handleChange, handleSubmit } = useForm((e) => {
+  function updateSettings(settings) {
     setUserSettings((userSettings) => {
-      return { ...userSettings, ...e };
+      return { ...userSettings, ...settings };
     });
-  }, userSettings);
+  }
+
+  const { handleChange, handleSubmit, handleToggle } = useForm(
+    updateSettings,
+    userSettings
+  );
 
   return (
     <Paper withBorder p='xs'>
@@ -36,7 +41,7 @@ export default function SettingsForm({ addItem }) {
           <Switch
             name='showCompletedTasks'
             label='Show Completed Tasks'
-            onChange={handleChange}
+            onChange={handleToggle}
             defaultChecked={userSettings.showCompletedTasks}
           />
 

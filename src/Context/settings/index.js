@@ -8,21 +8,12 @@ function SettingsProvider({ children }) {
     itemsPerPage: 5,
     sortKeyword: 'difficulty',
   });
-  const [displayCompleted, setDisplayCompleted] = useState(false);
-  const [displayCount, setDisplayCount] = useState(5);
-  const [defaultSortField, setDefaultSortField] = useState('difficulty');
 
   return (
     <SettingsContext.Provider
       value={{
         userSettings,
         setUserSettings,
-        displayCompleted,
-        setDisplayCompleted,
-        displayCount,
-        setDisplayCount,
-        defaultSortField,
-        setDefaultSortField,
       }}
     >
       {children}

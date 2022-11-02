@@ -1,5 +1,5 @@
-import { Header, Group, Text } from '@mantine/core';
-import { Outlet } from 'react-router-dom';
+import { Header, Group, Button, Anchor } from '@mantine/core';
+import { Outlet, Link } from 'react-router-dom';
 
 export default function Root() {
   return (
@@ -12,7 +12,12 @@ export default function Root() {
         mb={16}
       >
         <Group>
-          <Text color='white'>Home</Text>
+          <Button component={Link} to={'/'} color='white'>
+            Home
+          </Button>
+          <Button component={Link} to={'/settings'} color='white'>
+            Settings
+          </Button>
         </Group>
       </Header>
       <main>

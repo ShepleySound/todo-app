@@ -9,7 +9,7 @@ export default function TodoList({
   deleteItem,
   incomplete,
 }) {
-  const settings = useContext(SettingsContext);
+  const { userSettings } = useContext(SettingsContext);
   const [listStart, setListStart] = useState(0);
   const [displayList, setDisplayList] = useState(list);
   const [activePage, setPage] = useState(1);
@@ -17,11 +17,17 @@ export default function TodoList({
   useEffect(() => {
     setDisplayList(
       list
-        .filter((item) => !item.complete)
-        .slice(listStart, listStart + settings.displayCount)
+        .filter((item) => userSettings.showCompletedTasks || !item.complete)
+        .slice(listStart, listStart + userSettings.itemsPerPage)
     );
-    setListStart(settings.displayCount * (activePage - 1));
-  }, [list, listStart, activePage, settings.displayCount]);
+    setListStart(userSettings.itemsPerPage * (activePage - 1));
+  }, [
+    list,
+    listStart,
+    activePage,
+    userSettings.itemsPerPage,
+    userSettings.showCompletedTasks,
+  ]);
 
   return (
     <>
@@ -37,7 +43,11 @@ export default function TodoList({
         <Pagination
           page={activePage}
           onChange={setPage}
-          total={Math.ceil(incomplete / settings.displayCount)}
+          total={
+            userSettings.showCompletedTasks
+              ? Math.ceil(list.length / userSettings.itemsPerPage)
+              : Math.ceil(incomplete / userSettings.itemsPerPage)
+          }
         />
       </Stack>
     </>
