@@ -5,15 +5,15 @@ const useForm = (callback, defaultValues = {}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValues({});
+    // setValues({});
     callback(values);
   };
 
   const handleChange = (event) => {
-    let { name, value } = event.target;
-    if (parseInt(value)) {
-      value = parseInt(value);
-    }
+    const { name, value } = event.target;
+    // if (parseInt(value)) {
+    //   value = parseInt(value);
+    // }
 
     setValues((values) => ({ ...values, [name]: value }));
   };

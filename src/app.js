@@ -1,18 +1,18 @@
 import { useState, useContext, useEffect } from 'react';
-import Header from './Components/header';
+import StatusHeader from './Components/status-header';
 import TodoList from './Components/todo-list';
 import TodoForm from './Components/form';
 
 import { v4 as uuid } from 'uuid';
 
-import SettingsProvider from './Context/settings';
+import { SettingsProvider } from './Context/settings';
 import { Container, Grid } from '@mantine/core';
 
 export default function App() {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState(0);
 
-  function addItem(item) {
+  function addItem({ ...item }) {
     const newId = uuid();
     item.id = newId;
     item.complete = false;
@@ -50,7 +50,7 @@ export default function App() {
       <Container size='md'>
         <Grid>
           <Grid.Col span={12}>
-            <Header />
+            <StatusHeader incomplete={incomplete} />
           </Grid.Col>
           <Grid.Col span={4}>
             <TodoForm addItem={addItem} />
@@ -58,6 +58,7 @@ export default function App() {
           <Grid.Col span={8}>
             <TodoList
               list={list}
+              incomplete={incomplete}
               toggleComplete={toggleComplete}
               deleteItem={deleteItem}
             />

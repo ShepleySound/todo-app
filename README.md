@@ -1,8 +1,28 @@
 # React Todo Application
 
-A React Todo Application created using Mantine and a visual design reference. The reference can be found below.
+This todo application uses [Mantine](https://mantine.dev/) as the primary component library and has been constructed based off of an image reference. It will feature persisted user settings using localStorage as a storage mechanism.
+
+## Design Reference
 
 ![Reference](comp.png)
+
+## Features
+
+### Current
+
+- Create tasks using a central form
+- Update individual task status
+- Delete individual tasks
+- Global application settings passed through the React Context API
+- Task list pagination
+
+### To Be Implemented
+
+- Update application settings
+- Persistent application settings using localStorage
+- Interact with a live API
+- Responsive design
+- Transitions and animations using modern design principles.
 
 ## Available Scripts
 

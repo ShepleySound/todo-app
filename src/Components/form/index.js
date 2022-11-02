@@ -10,6 +10,7 @@ import {
   Text,
   Box,
   Paper,
+  Title,
 } from '@mantine/core';
 
 export default function TodoForm({ addItem }) {
@@ -21,64 +22,54 @@ export default function TodoForm({ addItem }) {
   return (
     <Paper withBorder p='xs'>
       <form onSubmit={handleSubmit}>
-        <h2>Add To Do Item</h2>
-        <TextInput
-          onChange={handleChange}
-          placeholder='Item details...'
-          label='Task'
-          withAsterisk
-          name='text'
-        />
+        <Stack spacing='md'>
+          <Title order={2}>Add To Do Item</Title>
+          <TextInput
+            data-testid='task-input'
+            onChange={handleChange}
+            placeholder='Item details...'
+            label='Task'
+            withAsterisk
+            name='text'
+          />
 
-        <TextInput
-          name='assignee'
-          onChange={handleChange}
-          placeholder='Assignee name...'
-          label='Assignee'
-          withAsterisk
-        />
+          <TextInput
+            data-testid='assignee-input'
+            name='assignee'
+            onChange={handleChange}
+            placeholder='Assignee name...'
+            label='Assignee'
+            withAsterisk
+          />
 
-        <Slider
-          name='difficulty'
-          onChangeEnd={(val) => {
-            const e = {
-              target: {
-                value: val,
-                name: 'difficulty',
-              },
-            };
-            handleChange(e);
-          }}
-          defaultValue={defaultValues.difficulty}
-          min={0}
-          max={4}
-          marks={[
-            { value: 1 },
-            { value: 2 },
-            { value: 3 },
-            { value: 4 },
-            { value: 5 },
-          ]}
-        />
+          <Slider
+            data-testid='slider-input'
+            name='difficulty'
+            onChangeEnd={(val) => {
+              const e = {
+                target: {
+                  value: val,
+                  name: 'difficulty',
+                },
+              };
+              handleChange(e);
+            }}
+            defaultValue={defaultValues.difficulty}
+            min={0}
+            max={4}
+            marks={[
+              { value: 1 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 5 },
+            ]}
+          />
 
-        <NumberInput
-          name='difficulty'
-          // Custom onChange callback because Mantine components only return a value rather than a full event.
-          // This is just a stop-gap for a better solution, hopefully.
-          onChange={(val) => {
-            const e = {
-              target: {
-                value: val,
-                name: 'difficulty',
-              },
-            };
-            handleChange(e);
-          }}
-          defaultValue={defaultValues.difficulty}
-          label='difficulty'
-        />
-
-        <Button type='submit'>Add Item</Button>
+          <Button data-testid='form-submit-button' type='submit'>
+            Add Item
+          </Button>
+        </Stack>
       </form>
     </Paper>
   );
