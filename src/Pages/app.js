@@ -46,36 +46,34 @@ export default function App() {
   }, [list]);
 
   return (
-    <AuthWrapper>
-      <Container size='md'>
-        <Grid>
-          <Grid.Col span={12}>
-            <StatusHeader>
-              <Title
-                order={3}
-                width={100}
-                data-testid='status-header-title'
-                color='white'
-              >
-                Todo List: {incomplete} items pending
-              </Title>
-            </StatusHeader>
+    <Container size='md'>
+      <Grid>
+        <Grid.Col span={12}>
+          <StatusHeader>
+            <Title
+              order={3}
+              width={100}
+              data-testid='status-header-title'
+              color='white'
+            >
+              Todo List: {incomplete} items pending
+            </Title>
+          </StatusHeader>
+        </Grid.Col>
+        <AuthWrapper capability='create'>
+          <Grid.Col span={4}>
+            <TodoForm addItem={addItem} />
           </Grid.Col>
-          <AuthWrapper capability='create'>
-            <Grid.Col span={4}>
-              <TodoForm addItem={addItem} />
-            </Grid.Col>
-          </AuthWrapper>
-          <Grid.Col span={8}>
-            <TodoList
-              list={list}
-              incomplete={incomplete}
-              toggleComplete={toggleComplete}
-              deleteItem={deleteItem}
-            />
-          </Grid.Col>
-        </Grid>
-      </Container>
-    </AuthWrapper>
+        </AuthWrapper>
+        <Grid.Col span={8}>
+          <TodoList
+            list={list}
+            incomplete={incomplete}
+            toggleComplete={toggleComplete}
+            deleteItem={deleteItem}
+          />
+        </Grid.Col>
+      </Grid>
+    </Container>
   );
 }

@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { Text, Badge, Card, Group, CloseButton } from '@mantine/core';
 
-import { LoginContext } from '../../Context/auth';
+import { AuthContext } from '../../Context/auth';
 
 const Todo = ({ item, toggleComplete, deleteItem }) => {
-  const { hasPermission } = useContext(LoginContext);
+  const { hasPermission } = useContext(AuthContext);
   return (
     <Card
       shadow='sm'

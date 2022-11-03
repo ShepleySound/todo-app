@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 import useForm from '../../hooks/use-form';
-import { LoginContext } from '../../Context/auth';
+import { AuthContext } from '../../Context/auth';
 import { Stack, TextInput, PasswordInput, Button } from '@mantine/core';
 
 export default function LoginForm({ modalClose }) {
-  const { login, loginData } = useContext(LoginContext);
+  const { login, loginData } = useContext(AuthContext);
   const [defaultValues] = useState({
     username: null,
     password: null,

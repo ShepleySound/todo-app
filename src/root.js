@@ -2,10 +2,10 @@ import { useState, useContext } from 'react';
 import { Header, Group, Button, Modal } from '@mantine/core';
 import { Outlet, Link } from 'react-router-dom';
 import LoginForm from './Components/login-form';
-import { LoginContext } from './Context/auth';
+import { AuthContext } from './Context/auth';
 
 export default function Root() {
-  const { logout, loginData } = useContext(LoginContext);
+  const { logout, loginData } = useContext(AuthContext);
   const [loginOpened, setLoginOpened] = useState(false);
   return (
     <>

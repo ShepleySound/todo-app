@@ -2,7 +2,7 @@ import { useState, createContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import jwt_decode from 'jwt-decode';
 
-const LoginContext = createContext(null);
+const AuthContext = createContext(null);
 const testUsers = {
   Administrator: {
     password: 'admin',
@@ -30,7 +30,7 @@ const testUsers = {
   },
 };
 
-function LoginProvider({ children }) {
+function AuthProvider({ children }) {
   const [cookies, setCookie] = useCookies(['auth']);
 
   const [loginData, setLoginData] = useState({
@@ -56,7 +56,6 @@ function LoginProvider({ children }) {
     if (auth && auth.password === password) {
       try {
         validateToken(auth.token);
-        console.log('Validated...');
       } catch (err) {
         console.error('Error validating token', err);
       }
@@ -89,10 +88,10 @@ function LoginProvider({ children }) {
   }, []);
 
   return (
-    <LoginContext.Provider value={{ loginData, hasPermission, login, logout }}>
+    <AuthContext.Provider value={{ loginData, hasPermission, login, logout }}>
       {children}
-    </LoginContext.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export { LoginContext, LoginProvider };
+export { AuthContext, AuthProvider };
