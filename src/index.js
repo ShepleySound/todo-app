@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import { SettingsProvider } from './Context/settings';
+import { LoginProvider } from './Context/auth';
 
 import Root from './root.js';
 import App from './Pages/app.js';
@@ -30,7 +31,9 @@ root.render(
   <React.StrictMode>
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <SettingsProvider>
-        <RouterProvider router={router} />
+        <LoginProvider>
+          <RouterProvider router={router} />
+        </LoginProvider>
       </SettingsProvider>
     </MantineProvider>
   </React.StrictMode>
