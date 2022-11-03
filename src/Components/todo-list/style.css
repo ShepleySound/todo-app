@@ -1,0 +1,11 @@
+.opacity_0 {
+  opacity: 0;
+}
+
+.opacity_100 {
+  opacity: 100;
+}
+
+.opacity_transition {
+  transition: opacity 500ms;
+}

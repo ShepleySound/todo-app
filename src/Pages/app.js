@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { Container, Grid, Title } from '@mantine/core';
@@ -16,6 +16,7 @@ export default function App() {
     const newId = uuid();
     item.id = newId;
     item.complete = false;
+    item.nodeRef = createRef(null);
     setList([...list, item]);
   }
 
@@ -25,13 +26,15 @@ export default function App() {
   }
 
   function toggleComplete(id) {
-    console.log(id);
+    console.log('ITEM NODE REFS');
     const items = list.map((item) => {
+      console.log(item.nodeRef);
       if (item.id === id) {
         item.complete = !item.complete;
       }
       return item;
     });
+    console.log('STOP HERE');
 
     setList(items);
   }

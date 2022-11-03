@@ -7,6 +7,7 @@ const Todo = ({ item, toggleComplete, deleteItem }) => {
   const { hasPermission } = useContext(AuthContext);
   return (
     <Card
+      ref={item.nodeRef}
       shadow='sm'
       radius='sm'
       withBorder
