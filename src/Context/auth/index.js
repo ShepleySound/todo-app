@@ -4,9 +4,9 @@ import jwt_decode from 'jwt-decode';
 
 const LoginContext = createContext(null);
 const testUsers = {
-  Admininistrator: {
+  Administrator: {
     password: 'admin',
-    name: 'Administrator',
+    name: 'admin',
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW5pc3RyYXRvciIsInJvbGUiOiJhZG1pbiIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJywncmVhZCcsJ3VwZGF0ZScsJ2RlbGV0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.pAZXAlTmC8fPELk2xHEaP1mUhR8egg9TH5rCyqZhZkQ',
   },
@@ -43,7 +43,9 @@ function LoginProvider({ children }) {
 
   const hasPermission = (capability) => {
     try {
-      return loginData.user.capabilities.includes(capability);
+      if (capability) {
+        return loginData.user.capabilities.includes(capability);
+      } else return true;
     } catch (err) {
       console.error(err);
     }
@@ -54,6 +56,7 @@ function LoginProvider({ children }) {
     if (auth && auth.password === password) {
       try {
         validateToken(auth.token);
+        console.log('Validated...');
       } catch (err) {
         console.error('Error validating token', err);
       }
@@ -74,7 +77,7 @@ function LoginProvider({ children }) {
   };
 
   const handleLoginState = (isLoggedIn, token, user, error) => {
-    setCookie('name', token);
+    setCookie('auth', token);
     setLoginData({ isLoggedIn, user, error: error || null });
   };
 
