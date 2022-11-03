@@ -1,4 +1,4 @@
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { Container, Grid, Title } from '@mantine/core';
@@ -16,7 +16,6 @@ export default function App() {
     const newId = uuid();
     item.id = newId;
     item.complete = false;
-    item.nodeRef = createRef(null);
     setList([...list, item]);
   }
 
@@ -26,15 +25,12 @@ export default function App() {
   }
 
   function toggleComplete(id) {
-    console.log('ITEM NODE REFS');
     const items = list.map((item) => {
-      console.log(item.nodeRef);
       if (item.id === id) {
         item.complete = !item.complete;
       }
       return item;
     });
-    console.log('STOP HERE');
 
     setList(items);
   }
@@ -49,26 +45,21 @@ export default function App() {
   }, [list]);
 
   return (
-    <Container size='md'>
+    <Container size='lg'>
       <Grid>
         <Grid.Col span={12}>
           <StatusHeader>
-            <Title
-              order={3}
-              width={100}
-              data-testid='status-header-title'
-              color='white'
-            >
+            <Title order={3} data-testid='status-header-title' color='white'>
               Todo List: {incomplete} items pending
             </Title>
           </StatusHeader>
         </Grid.Col>
         <AuthWrapper capability='create'>
-          <Grid.Col span={4}>
+          <Grid.Col sm={12} md={4}>
             <TodoForm addItem={addItem} />
           </Grid.Col>
         </AuthWrapper>
-        <Grid.Col span={8}>
+        <Grid.Col sm={12} md={8}>
           <TodoList
             list={list}
             incomplete={incomplete}
