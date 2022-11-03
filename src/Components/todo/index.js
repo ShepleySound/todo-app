@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  TextInput,
-  Slider,
-  NumberInput,
-  Stack,
-  Container,
-  Text,
-  Box,
-  Badge,
-  Card,
-  Divider,
-  Group,
-  Grid,
-  Center,
-  CloseButton,
-} from '@mantine/core';
+import { useContext } from 'react';
+import { Text, Badge, Card, Group, CloseButton } from '@mantine/core';
+
+import { AuthContext } from '../../Context/auth';
 
 const Todo = ({ item, toggleComplete, deleteItem }) => {
+  const { hasPermission } = useContext(AuthContext);
   return (
     <Card
       shadow='sm'
       radius='sm'
       withBorder
-      onClick={() => toggleComplete(item.id)}
+      onClick={() => {
+        if (hasPermission('update')) {
+          toggleComplete(item.id);
+        } else console.log('Must have update permission.');
+      }}
     >
       <Card.Section withBorder inheritPadding py='xs'>
         <Group position='apart'>
@@ -44,7 +35,9 @@ const Todo = ({ item, toggleComplete, deleteItem }) => {
               title='Delete Task'
               onClick={(e) => {
                 e.stopPropagation();
-                deleteItem(item.id);
+                if (hasPermission('delete')) {
+                  deleteItem(item.id);
+                } else console.log('Must have delete permission.');
               }}
             ></CloseButton>
           </Group>

@@ -14,8 +14,12 @@ const useForm = (callback, defaultValues = {}) => {
     // if (parseInt(value)) {
     //   value = parseInt(value);
     // }
-
     setValues((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleToggle = (event) => {
+    const { name, checked } = event.target;
+    setValues((values) => ({ ...values, [name]: checked }));
   };
 
   useEffect(() => {
@@ -24,6 +28,7 @@ const useForm = (callback, defaultValues = {}) => {
 
   return {
     handleChange,
+    handleToggle,
     handleSubmit,
     values,
   };

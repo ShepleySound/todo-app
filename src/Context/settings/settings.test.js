@@ -7,11 +7,11 @@ describe('Settings Context', () => {
     render(
       <SettingsProvider>
         <SettingsContext.Consumer>
-          {(settings) => (
+          {({userSettings}) => (
             <>
-              <div data-testid='boolean-test'>{`${settings.displayCompleted}`}</div>
-              <div data-testid='count-test'>{settings.displayCount}</div>
-              <div data-testid='string-test'>{settings.defaultSortField}</div>
+              <div data-testid='boolean-test'>{`${userSettings.showCompletedTasks}`}</div>
+              <div data-testid='count-test'>{userSettings.itemsPerPage}</div>
+              <div data-testid='string-test'>{userSettings.sortKeyword}</div>
             </>
           )}
         </SettingsContext.Consumer>

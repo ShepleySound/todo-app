@@ -1,6 +1,6 @@
-import { Container, Title } from '@mantine/core';
+import { Container } from '@mantine/core';
 
-export default function StatusHeader(props) {
+export default function StatusHeader({ children }) {
   return (
     <Container
       data-testid='status-header'
@@ -9,14 +9,7 @@ export default function StatusHeader(props) {
         backgroundColor: theme.colors.gray[8],
       })}
     >
-      <Title
-        order={3}
-        width={100}
-        data-testid='status-header-title'
-        color='white'
-      >
-        Todo List: {props.incomplete} items pending
-      </Title>
+      {children}
     </Container>
   );
 }

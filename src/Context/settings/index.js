@@ -1,18 +1,21 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
+import useLocalStorage from '../../hooks/use-local-storage';
 
 const SettingsContext = createContext(null);
 
 function SettingsProvider({ children }) {
-  const [displayCompleted, setDisplayCompleted] = useState(false);
-  const [displayCount, setDisplayCount] = useState(5);
-  const [defaultSortField, setDefaultSortField] = useState('difficulty');
+
+  const [userSettings, setUserSettings] = useLocalStorage('userSettings', {
+    showCompletedTasks: false,
+    itemsPerPage: 5,
+    sortKeyword: 'difficulty',
+  });
 
   return (
     <SettingsContext.Provider
       value={{
-        displayCompleted,
-        displayCount,
-        defaultSortField,
+        userSettings,
+        setUserSettings,
       }}
     >
       {children}
