@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
+import axios from 'axios';
 
 import { Container, Grid, Title } from '@mantine/core';
 
@@ -8,33 +9,60 @@ import TodoList from '../Components/todo-list';
 import TodoForm from '../Components/form';
 import AuthWrapper from '../Components/auth-wrapper';
 
+import { AuthContext } from '../Context/auth';
+
 export default function App() {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState(0);
+  const { loginData } = useContext(AuthContext);
 
-  function addItem({ ...item }) {
-    const newId = uuid();
-    item.id = newId;
-    item.complete = false;
-    setList([...list, item]);
+  async function apiRequest(method, route, data = null) {
+    const response = await axios({
+      url: route,
+      method: method,
+      baseURL: process.env.REACT_APP_TODO_API_URL,
+      headers: {
+        Authorization: `Bearer ${loginData.token}`,
+      },
+      data: data,
+    });
+    return response;
   }
 
-  function deleteItem(id) {
-    const items = list.filter((item) => item.id !== id);
-    setList(items);
-  }
-
-  function toggleComplete(id) {
-    console.log(id);
-    const items = list.map((item) => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return item;
+  async function addItem({ ...item }) {
+    await apiRequest('post', 'api/todos', {
+      task: item.task || 'Default task',
+      difficulty: item.difficulty,
+      complete: false,
     });
 
-    setList(items);
+    await getTodos();
   }
+
+  async function deleteItem(id) {
+    await apiRequest('delete', `api/todos/${id}`);
+    await getTodos();
+  }
+
+  async function toggleComplete(id) {
+    const todo = await apiRequest('get', `api/todos/${id}`);
+    console.log(todo.data);
+    await apiRequest('patch', `api/todos/${id}`, {
+      complete: !todo.data.complete,
+    });
+
+    await getTodos();
+  }
+
+  const getTodos = useCallback(async () => {
+    const response = await apiRequest('get', 'api/todos');
+    setList(response.data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    getTodos().catch(console.error);
+  }, [getTodos]);
 
   useEffect(() => {
     let incompleteCount = list.filter((item) => !item.complete).length;
@@ -46,26 +74,21 @@ export default function App() {
   }, [list]);
 
   return (
-    <Container size='md'>
+    <Container size='lg'>
       <Grid>
         <Grid.Col span={12}>
           <StatusHeader>
-            <Title
-              order={3}
-              width={100}
-              data-testid='status-header-title'
-              color='white'
-            >
+            <Title order={3} data-testid='status-header-title' color='white'>
               Todo List: {incomplete} items pending
             </Title>
           </StatusHeader>
         </Grid.Col>
         <AuthWrapper capability='create'>
-          <Grid.Col span={4}>
+          <Grid.Col sm={12} md={4}>
             <TodoForm addItem={addItem} />
           </Grid.Col>
         </AuthWrapper>
-        <Grid.Col span={8}>
+        <Grid.Col sm={12} md={8}>
           <TodoList
             list={list}
             incomplete={incomplete}

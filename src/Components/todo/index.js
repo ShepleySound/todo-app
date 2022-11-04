@@ -7,6 +7,7 @@ const Todo = ({ item, toggleComplete, deleteItem }) => {
   const { hasPermission } = useContext(AuthContext);
   return (
     <Card
+      ref={item.nodeRef}
       shadow='sm'
       radius='sm'
       withBorder
@@ -28,7 +29,7 @@ const Todo = ({ item, toggleComplete, deleteItem }) => {
                 pending
               </Badge>
             )}
-            <Text span>{item.assignee}</Text>
+            <Text span>{item.author}</Text>
           </Group>
           <Group>
             <CloseButton
@@ -45,7 +46,7 @@ const Todo = ({ item, toggleComplete, deleteItem }) => {
       </Card.Section>
       {/* <Divider my='sm' /> */}
       <Card.Section inheritPadding py='xs'>
-        <Text lineClamp={10}>{item.text}</Text>
+        <Text lineClamp={10}>{item.task}</Text>
       </Card.Section>
       <Card.Section p='xs'>
         <Group position='right'>
