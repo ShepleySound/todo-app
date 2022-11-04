@@ -1,8 +1,8 @@
-# React Todo Application
+# Live Tasks
 
-This todo application uses [Mantine](https://mantine.dev/) as the primary component library and has been constructed based off of an image reference. It feature persisted settings using localStorage as a storage mechanism.
+Create tasks in public! Create an account and add to an evergrowing list of tasks that need to be completed by people just like you!
 
-I am currently in the process of implementing user authentication and role based access functionality!
+This application uses [Mantine](https://mantine.dev/) as the primary component library and [Framer Motion](https://www.framer.com/motion/) for animation.
 
 ## Design Reference
 
@@ -14,15 +14,22 @@ I am currently in the process of implementing user authentication and role based
 
 - Create tasks using a central form
 - Update individual task status
-- Delete individual tasksx
+- Delete individual tasks
 - Global application settings passed through the React Context API
 - Task list pagination
-- Update application settings
 - Persistent application settings using localStorage
-- Mock user sign in
 - Interact with a live API
 - Responsive design
 - Transitions and animations using modern design principles
+
+### To Be Implemented
+
+- Sign up
+- Dark mode
+- Display tasks specific to a certain user
+- Branding
+- Sort tasks by time posted
+- Public/Private setting for tasks
 
 ## Using the application
 
