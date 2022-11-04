@@ -20,29 +20,30 @@ I am currently in the process of implementing user authentication and role based
 - Update application settings
 - Persistent application settings using localStorage
 - Mock user sign in
-
-### To Be Implemented
-
 - Interact with a live API
 - Responsive design
 - Transitions and animations using modern design principles
 
 ## Using the application
 
-The application is not currently hosted or connected to any external data store, so it must be tested locally. Once you have cloned the repository and installed dependencies using `npm install`, you can use `npm start` to run the application.
+The application connects to a remote REST API for authentication and to interact with a database of todo items. Currently, the REST API is not publically hosted, but the source code can be found in [this repository](https://github.com/ShepleySound/todo-app-api).
 
-In its current state, sign in functionality uses static test accounts to assess whether or not access should be granted to a certain feature. To test out how this looks, try logging in with the following accounts.
+If you would like to test this application in its current state, clone this repository and the API repository to your local machine. In addition, environment variables will need to be set in both directories. See the README.md for the environment variables needed for the API.
+
+To set environment variables for the client, create a file called `.env` at the top level of this directory.
+
+Open that file using the text/code editor of your choice, and place the following line inside -
 
 ```
----
-username: Administrator
-password: admin
-capabilities: read, update, delete, create
----
-username: User
-password: user
-capabilities: read
+REACT_APP_TODO_API_URL = http://localhost:3001
 ```
+
+_NOTE: I typically use port 3001 when testing an API locally. Replace the above number with whatever port you choose to set in the API's `.env` file._
+
+## UI Resources
+
+- [Mantine](https://mantine.dev/) (Component Library)
+- [Framer Motion](https://www.framer.com/motion/) (Animation)
 
 ## Available Scripts
 
@@ -50,7 +51,7 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
