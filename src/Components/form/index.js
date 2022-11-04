@@ -27,24 +27,17 @@ export default function TodoForm({ addItem }) {
           <TextInput
             data-testid='task-input'
             onChange={handleChange}
-            placeholder='Item details...'
+            placeholder='Task details...'
             label='Task'
             withAsterisk
-            name='text'
-          />
-
-          <TextInput
-            data-testid='assignee-input'
-            name='assignee'
-            onChange={handleChange}
-            placeholder='Assignee name...'
-            label='Assignee'
-            withAsterisk
+            name='task'
           />
 
           <Slider
+            mb={16}
             data-testid='slider-input'
             name='difficulty'
+            label='Difficulty'
             onChangeEnd={(val) => {
               const e = {
                 target: {
@@ -58,11 +51,11 @@ export default function TodoForm({ addItem }) {
             min={0}
             max={4}
             marks={[
-              { value: 1 },
-              { value: 2 },
-              { value: 3 },
-              { value: 4 },
-              { value: 5 },
+              { value: 0, label: '0' },
+              { value: 1, label: 1 },
+              { value: 2, label: 2 },
+              { value: 3, label: 3 },
+              { value: 4, label: 4 },
             ]}
           />
 

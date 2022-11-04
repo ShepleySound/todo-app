@@ -48,7 +48,6 @@ function AuthProvider({ children }) {
 
   const hasPermission = (capability) => {
     try {
-      console.log(loginData);
       if (capability) {
         return loginData.user.capabilities.includes(capability);
       } else return true;
@@ -92,7 +91,7 @@ function AuthProvider({ children }) {
 
   const handleLoginState = (isLoggedIn, token, user, error) => {
     setCookie('auth', token);
-    setLoginData({ isLoggedIn, user, error: error || null });
+    setLoginData({ isLoggedIn, token, user, error: error || null });
     authInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
