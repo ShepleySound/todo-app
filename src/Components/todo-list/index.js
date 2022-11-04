@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { Stack, Pagination } from '@mantine/core';
 import { SettingsContext } from '../../Context/settings';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import Todo from '../todo';
 
 export default function TodoList({
@@ -33,37 +33,41 @@ export default function TodoList({
   return (
     <>
       <Stack>
-        <Stack>
-          <AnimatePresence mode='popLayout'>
-            {displayList.map((item) => (
-              <motion.div
-                layout
-                key={item.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <Todo
+        <LayoutGroup>
+          <Stack>
+            <AnimatePresence mode='popLayout'>
+              {displayList.map((item) => (
+                <motion.div
+                  layout
                   key={item.id}
-                  item={item}
-                  toggleComplete={toggleComplete}
-                  deleteItem={deleteItem}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </Stack>
-        <Pagination
-          page={activePage}
-          onChange={(val) => {
-            setPage(val);
-          }}
-          total={
-            userSettings.showCompletedTasks
-              ? Math.ceil(list.length / userSettings.itemsPerPage)
-              : Math.ceil(incomplete / userSettings.itemsPerPage)
-          }
-        />
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                >
+                  <Todo
+                    key={item.id}
+                    item={item}
+                    toggleComplete={toggleComplete}
+                    deleteItem={deleteItem}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </Stack>
+          <motion.div layout>
+            <Pagination
+              page={activePage}
+              onChange={(val) => {
+                setPage(val);
+              }}
+              total={
+                userSettings.showCompletedTasks
+                  ? Math.ceil(list.length / userSettings.itemsPerPage)
+                  : Math.ceil(incomplete / userSettings.itemsPerPage)
+              }
+            />
+          </motion.div>
+        </LayoutGroup>
       </Stack>
     </>
   );

@@ -1,6 +1,11 @@
 import { useState, createContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import jwt_decode from 'jwt-decode';
+import axios from 'axios';
+
+const authInstance = axios.create({
+  baseURL: process.env.REACT_APP_TODO_API_URL,
+});
 
 const AuthContext = createContext(null);
 const testUsers = {
@@ -43,6 +48,7 @@ function AuthProvider({ children }) {
 
   const hasPermission = (capability) => {
     try {
+      console.log(loginData);
       if (capability) {
         return loginData.user.capabilities.includes(capability);
       } else return true;
@@ -52,13 +58,22 @@ function AuthProvider({ children }) {
   };
 
   const login = async (username, password) => {
-    let auth = testUsers[username];
-    if (auth && auth.password === password) {
-      try {
-        validateToken(auth.token);
-      } catch (err) {
-        console.error('Error validating token', err);
+    try {
+      const response = await authInstance.post(
+        '/auth/signin',
+        {},
+        {
+          auth: {
+            username: username,
+            password: password,
+          },
+        }
+      );
+      if (response.data.token) {
+        validateToken(response.data.token);
       }
+    } catch (err) {
+      console.error('Error validating token.', err.message);
     }
   };
 
@@ -78,6 +93,7 @@ function AuthProvider({ children }) {
   const handleLoginState = (isLoggedIn, token, user, error) => {
     setCookie('auth', token);
     setLoginData({ isLoggedIn, user, error: error || null });
+    authInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
   useEffect(() => {
